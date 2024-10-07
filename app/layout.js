@@ -1,4 +1,6 @@
-// layout.js
+import NavBar from "./components/NavBar";
+import "./globals.css";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -8,7 +10,12 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-gray-50">
         {/* Render the children, which will be the page content */}
-        <main>{children}</main>
+        <main>
+          <div>
+            <NavBar />
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );
