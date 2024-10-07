@@ -1,22 +1,33 @@
-// components/Contact.js
-'use client'
-import { motion } from 'framer-motion';
+"use client";
+import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
 
 export default function Contact() {
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center bg-darkBg text-primary">
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-4xl text-center"
-      >
-        <h2 className="text-4xl font-bold mb-4">Contact Me</h2>
-        <p className="text-lg">
-          Feel free to reach out to me through the form below.
-        </p>
-        {/* Add a simple form */}
-      </motion.div>
+    <section
+      id="contact"
+      className="h-screen flex flex-col items-center justify-center bg-[#354F52]"
+    >
+      <h2 className="text-3xl mb-4">Contact</h2>
+      {/* Social Media Links */}
+      <div className="flex space-x-4">
+        <a
+          href="https://linkedin.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaLinkedin className="text-white hover:text-[#84A98C]" size={24} />
+        </a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+          <FaGithub className="text-white hover:text-[#84A98C]" size={24} />
+        </a>
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaInstagram className="text-white hover:text-[#84A98C]" size={24} />
+        </a>
+      </div>
     </section>
   );
 }

@@ -1,15 +1,17 @@
-/* globals.css */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
 
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/* Tailwind CSS Imports */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+/* Custom Global Styles */
+body {
+  @apply font-lato text-darkText bg-gray-100; /* Set font to Lato and define text and background color */
 }
 
-body {
-  font-family: 'Lato', sans-serif;
+/* Font Styling */
+html {
+  font-family: "Lato", sans-serif;
+  scroll-behavior: smooth;
 }

@@ -1,10 +1,15 @@
-// components/Home.js\
 'use client'
 import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-r from-accent1 to-accent2 text-white">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center text-white"
+      style={{
+        background: 'linear-gradient(to right, #CAD2C5, #84A98C, #52796F, #354F52, #2F3E46)',
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

@@ -1,43 +1,72 @@
-'use client'; // This indicates that this is a client component
+"use client";
 
-import Link from 'next/link';
-import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function NavBar() {
+  const [activeSection, setActiveSection] = useState("home");
+
+  const handleScroll = () => {
+    const sections = document.querySelectorAll("section");
+    let scrollPosition = window.scrollY;
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+
+      // Check if the current scroll position is in the current section
+      if (
+        scrollPosition >= sectionTop - sectionHeight / 3 &&
+        scrollPosition < sectionTop + sectionHeight - sectionHeight / 3
+      ) {
+        setActiveSection(section.getAttribute("id"));
+      }
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="fixed w-full top-0 bg-transparent z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between h-16 items-center">
-        {/* Left Side: Alifiyah Shahid and Navigation Buttons */}
-        <div className="flex items-center space-x-4">
-          {/* Home Link */}
-          <Link href="#home" scroll={false} className="text-[#2F3E46] font-bold text-lg hover:text-[#84A98C]">
-            Alifiyah Shahid
-          </Link>
-
-          {/* Navigation Buttons */}
-          <Link href="#about" scroll={false} className="text-[#2F3E46] bg-[#354F52] px-4 py-2 rounded hover:bg-[#84A98C] transition">
-            About
-          </Link>
-          <Link href="#projects" scroll={false} className="text-[#2F3E46] bg-[#354F52] px-4 py-2 rounded hover:bg-[#84A98C] transition">
-            Projects
-          </Link>
-          <Link href="#contact" scroll={false} className="text-[#2F3E46] bg-[#354F52] px-4 py-2 rounded hover:bg-[#84A98C] transition">
-            Contact
-          </Link>
-        </div>
-
-        {/* Right Side: Social Media Icons */}
-        <div className="flex items-center space-x-4">
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin className="text-[#2F3E46] hover:text-[#84A98C]" size={24} />
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-            <FaGithub className="text-[#2F3E46] hover:text-[#84A98C]" size={24} />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-[#2F3E46] hover:text-[#84A98C]" size={24} />
-          </a>
-        </div>
+    <nav className="fixed left-1/2 transform -translate-x-1/2 top-4 bg-[#CAD2C5] rounded-2xl shadow-md w-80 h-12 z-50 flex items-center px-4">
+      <div className="flex items-center justify-between w-full">
+        <Link
+          href="#home"
+          className={`transition flex-1 text-center ${
+            activeSection === "home" ? "text-white" : "text-[#2F3E46]"
+          } hover:text-white`}
+        >
+          Home
+        </Link>
+        <Link
+          href="#about"
+          className={`transition flex-1 text-center ${
+            activeSection === "about" ? "text-white" : "text-[#2F3E46]"
+          } hover:text-white`}
+        >
+          About
+        </Link>
+        <Link
+          href="#projects"
+          className={`transition flex-1 text-center ${
+            activeSection === "projects" ? "text-white" : "text-[#2F3E46]"
+          } hover:text-white`}
+        >
+          Projects
+        </Link>
+        <Link
+          href="#contact"
+          className={`transition flex-1 text-center ${
+            activeSection === "contact" ? "text-white" : "text-[#2F3E46]"
+          } hover:text-white`}
+        >
+          Contact
+        </Link>
       </div>
     </nav>
   );

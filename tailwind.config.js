@@ -13,6 +13,9 @@ module.exports = {
         buttonsColor: '#354F52',  // Button background color
         accent1: '#84A98C',       // Highlight color on hover
       },
+      fontFamily: {
+        lato: ['Lato', 'sans-serif'], // Add Lato font
+      },
     },
   },
   plugins: [],
