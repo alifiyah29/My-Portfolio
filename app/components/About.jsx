@@ -1,9 +1,37 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link"; // For linking buttons to other pages
+import { useState, useEffect, useRef } from "react"; // Import useState and useRef for modal control
+import Education from "./Education"; // Import the Education modal component
 
 export default function About() {
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+
+  // Handle mouse events to show/hide the modal
+  const handleMouseEnter = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsModalOpen(false);
+  };
+
+  // Close modal on click outside
+  const handleClickOutside = (event) => {
+    if (isModalOpen) {
+      setIsModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener for click outside
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Cleanup the event listener on component unmount
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]); // Dependency array ensures the listener updates when isModalOpen changes
+
   return (
     <section
       id="about"
@@ -12,20 +40,25 @@ export default function About() {
       {/* Left Side Buttons */}
       <div className="absolute left-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
         {[
-          { name: "Education", link: "/education" },
+          {
+            name: "Education",
+            onMouseEnter: handleMouseEnter, // Show modal on hover
+          },
           { name: "Experience", link: "/experience" },
           { name: "Recent Work", link: "/recent-work" },
           { name: "Skills", link: "/skills" },
           { name: "Achievements", link: "/achievements" },
           { name: "Hobbies", link: "/hobbies" },
         ].map((item) => (
-          <Link
+          <button
             key={item.name}
-            href={item.link}
+            onMouseEnter={item.onMouseEnter || undefined} // Add hover functionality
+            onMouseLeave={item.onMouseLeave || undefined} // Add hover out functionality
+            onClick={item.link ? () => window.location.href = item.link : undefined} // Navigate if link exists
             className="bg-[#52796F] hover:bg-[#354F52] text-white font-bold py-3 px-6 rounded-full transition duration-300"
           >
             {item.name}
-          </Link>
+          </button>
         ))}
       </div>
 
@@ -81,6 +114,9 @@ export default function About() {
           allowFullScreen
         ></iframe>
       </div>
+
+      {/* Modal for Education */}
+      {isModalOpen && <Education onClose={handleMouseLeave} />} {/* No need for additional wrapping div */}
     </section>
   );
 }
