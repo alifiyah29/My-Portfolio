@@ -22,7 +22,7 @@ export default function Education({ onClose }) {
             {/* Masters Button */}
             <button className="bg-[#2F3E46] text-white text-xl font-bold py-4 rounded-lg hover:bg-[#1A2428] transition duration-300 flex-1">
               <div>
-                <b>Masters in Information Technology</b>
+                <b>Masters in Information Technology</b>{" "}
                 <p className="mb-0">Arizona State University</p>
               </div>
             </button>
@@ -30,7 +30,7 @@ export default function Education({ onClose }) {
             {/* Bachelors Button */}
             <button className="bg-[#2F3E46] text-white text-xl font-bold py-4 rounded-lg hover:bg-[#1A2428] transition duration-300 flex-1">
               <div>
-                <b>Bachelors in Computer Science</b>
+                <b>Bachelors in Computer Science</b>{" "}
                 <p className="mb-0">Rajiv Gandhi Technical University</p>
               </div>
             </button>

@@ -1,13 +1,17 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link"; // For linking buttons to other pages
 import { useState, useEffect, useRef } from "react"; // Import useState and useRef for modal control
 import Education from "./Education"; // Import the Education modal component
+import Experience from "./Experience"; // Import the WorkExperience modal component
 
 export default function About() {
   const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isExperienceOpen, setIsExperienceOpen] = useState(false); // State for Work Experience modal
+  const modalRef = useRef(null); // Ref to keep track of the modal element
 
-  // Handle mouse events to show/hide the modal
+  // Handle mouse events to show/hide the modals
   const handleMouseEnter = () => {
     setIsModalOpen(true);
   };
@@ -16,10 +20,19 @@ export default function About() {
     setIsModalOpen(false);
   };
 
+  const handleExperienceMouseEnter = () => {
+    setIsExperienceOpen(true);
+  };
+
+  const handleExperienceMouseLeave = () => {
+    setIsExperienceOpen(false);
+  };
+
   // Close modal on click outside
   const handleClickOutside = (event) => {
-    if (isModalOpen) {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
       setIsModalOpen(false);
+      setIsExperienceOpen(false); // Close experience modal as well
     }
   };
 
@@ -30,7 +43,7 @@ export default function About() {
       // Cleanup the event listener on component unmount
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isModalOpen]); // Dependency array ensures the listener updates when isModalOpen changes
+  }, []);
 
   return (
     <section
@@ -42,9 +55,12 @@ export default function About() {
         {[
           {
             name: "Education",
-            onMouseEnter: handleMouseEnter, // Show modal on hover
+            onMouseEnter: handleMouseEnter, // Show education modal on hover
           },
-          { name: "Experience", link: "/experience" },
+          {
+            name: "Experience",
+            onMouseEnter: handleExperienceMouseEnter, // Show experience modal on hover
+          },
           { name: "Recent Work", link: "/recent-work" },
           { name: "Skills", link: "/skills" },
           { name: "Achievements", link: "/achievements" },
@@ -54,7 +70,9 @@ export default function About() {
             key={item.name}
             onMouseEnter={item.onMouseEnter || undefined} // Add hover functionality
             onMouseLeave={item.onMouseLeave || undefined} // Add hover out functionality
-            onClick={item.link ? () => window.location.href = item.link : undefined} // Navigate if link exists
+            onClick={
+              item.link ? () => (window.location.href = item.link) : undefined
+            } // Navigate if link exists
             className="bg-[#52796F] hover:bg-[#354F52] text-white font-bold py-3 px-6 rounded-full transition duration-300"
           >
             {item.name}
@@ -85,21 +103,22 @@ export default function About() {
 
         {/* Bullet Points */}
         <ul className="text-lg space-y-4 list-disc text-left max-w-3xl mx-auto">
-          <li>
+          <p>
             Versatile Software Engineer, skilled in full-stack development,
             cloud architecture, and database management using React, Node.js,
             AWS, and MongoDB.
-          </li>
-          <li>
+          </p>
+
+          <p>
             Passionate problem solver who enjoys building scalable,
             high-performance solutions and automating workflows, with hands-on
             experience in CI/CD pipelines and API integrations.
-          </li>
-          <li>
+          </p>
+          <p>
             AWS Certified Cloud Practitioner, always excited to stay on the
             cutting edge of technology and turn innovative ideas into real-world
             applications.
-          </li>
+          </p>
         </ul>
       </motion.div>
 
@@ -108,15 +127,25 @@ export default function About() {
         <iframe
           src="https://lottie.host/embed/b8799295-4e48-48d5-a547-3c144a7d1a6c/e7tHBYgL7q.json"
           width="300"
-          height="700"
+          height="800"
           frameBorder="0"
           style={{ border: "none", overflow: "hidden" }}
           allowFullScreen
         ></iframe>
       </div>
 
-      {/* Modal for Education */}
-      {isModalOpen && <Education onClose={handleMouseLeave} />} {/* No need for additional wrapping div */}
+      {/* Modals for Education and Work Experience */}
+      {isModalOpen && (
+        <div ref={modalRef}>
+          <Education onClose={handleMouseLeave} /> {/* Close on modal close */}
+        </div>
+      )}
+      {isExperienceOpen && (
+        <div ref={modalRef}>
+          <Experience onClose={handleExperienceMouseLeave} />{" "}
+          {/* Close on modal close */}
+        </div>
+      )}
     </section>
   );
 }
