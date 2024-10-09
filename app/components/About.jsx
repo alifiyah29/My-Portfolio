@@ -7,13 +7,15 @@ import Experience from "./Experience";
 import RecentWork from "./RecentWork";
 import Skills from "./Skills";
 import Achievements from "./Achievements";
+import Hobbies from "./Hobbies";
 
 export default function About() {
-  const [isRecentWorkOpen, setIsRecentWorkOpen] = useState(false);
   const [isEducationOpen, setIsEducationOpen] = useState(false);
   const [isExperienceOpen, setIsExperienceOpen] = useState(false);
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+  const [isRecentWorkOpen, setIsRecentWorkOpen] = useState(false);
+  const [isHobbiesOpen, setIsHobbiesOpen] = useState(false);
   const modalRef = useRef(null);
 
   // Handle mouse events to show/hide the modals
@@ -56,6 +58,14 @@ export default function About() {
     setIsAchievementsOpen(false);
   };
 
+  const handleHobbiesEnter = () => {
+    setIsHobbiesOpen(true);
+  };
+
+  const handleHobbiesLeave = () => {
+    setIsHobbiesOpen(false);
+  };
+
   // Close modal on click outside
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -64,6 +74,7 @@ export default function About() {
       setIsRecentWorkOpen(false);
       setIsSkillsOpen(false);
       setIsAchievementsOpen(false);
+      setIsHobbiesOpen(false);
     }
   };
 
@@ -104,7 +115,10 @@ export default function About() {
             name: "Achievements",
             onMouseEnter: handelAchievementsEnter,
           },
-          { name: "Hobbies", link: "/hobbies" },
+          {
+            name: "Hobbies",
+            onMouseEnter: handleHobbiesEnter,
+          },
         ].map((item) => (
           <button
             key={item.name}
@@ -139,10 +153,10 @@ export default function About() {
         </div>
 
         {/* About Me Section */}
-        <h2 className="text-4xl font-bold mb-6">About Me</h2>
+        <h2 className="text-6xl font-bold mb-6">About Me</h2>
 
         {/* Bullet Points */}
-        <ul className="text-lg space-y-4 list-disc text-left max-w-3xl mx-auto">
+        <ul className="text-2xl space-y-4 list-disc text-left max-w-3xl mx-auto">
           <p>
             Versatile Software Engineer, skilled in full-stack development,
             cloud architecture, and database management using React, Node.js,
@@ -166,8 +180,8 @@ export default function About() {
       <div className="absolute right-10 top-1/2 transform -translate-y-1/2">
         <iframe
           src="https://lottie.host/embed/b8799295-4e48-48d5-a547-3c144a7d1a6c/e7tHBYgL7q.json"
-          width="300"
-          height="800"
+          width="500"
+          height="10000"
           frameBorder="0"
           style={{ border: "none", overflow: "hidden" }}
           allowFullScreen
@@ -198,6 +212,11 @@ export default function About() {
       {isAchievementsOpen && (
         <div ref={modalRef}>
           <Achievements onClose={handelAchievementsLeave} />
+        </div>
+      )}
+      {isHobbiesOpen && (
+        <div ref={modalRef}>
+          <Hobbies onClose={handleHobbiesLeave} />
         </div>
       )}
     </section>
