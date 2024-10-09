@@ -1,15 +1,17 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react"; 
-import Education from "./Education"; 
-import Experience from "./Experience"; 
+import { useState, useEffect, useRef } from "react";
+import Education from "./Education";
+import Experience from "./Experience";
 import RecentWork from "./RecentWork";
+import Skills from "./Skills";
 
 export default function About() {
   const [isRecentWorkOpen, setIsRecentWorkOpen] = useState(false);
   const [isEducationOpen, setIsEducationOpen] = useState(false);
   const [isExperienceOpen, setIsExperienceOpen] = useState(false);
+  const [isSkillsOpen, setIsSkillsOpen] = useState(false);
   const modalRef = useRef(null);
 
   // Handle mouse events to show/hide the modals
@@ -37,12 +39,21 @@ export default function About() {
     setIsRecentWorkOpen(false);
   };
 
+  const handleSkillsEnter = () => {
+    setIsSkillsOpen(true);
+  };
+
+  const handleSkillsLeave = () => {
+    setIsSkillsOpen(false);
+  };
+
   // Close modal on click outside
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setIsEducationOpen(false);
-      setIsExperienceOpen(false); 
+      setIsExperienceOpen(false);
       setIsRecentWorkOpen(false);
+      setIsSkillsOpen(false);
     }
   };
 
@@ -75,7 +86,10 @@ export default function About() {
             name: "Recent Work",
             onMouseEnter: handleRecentWorkEnter,
           },
-          { name: "Skills", link: "/skills" },
+          {
+            name: "Skills",
+            onMouseEnter: handleSkillsEnter,
+          },
           { name: "Achievements", link: "/achievements" },
           { name: "Hobbies", link: "/hobbies" },
         ].map((item) => (
@@ -85,7 +99,7 @@ export default function About() {
             onMouseLeave={item.onMouseLeave || undefined}
             onClick={
               item.link ? () => (window.location.href = item.link) : undefined
-            } 
+            }
             className="bg-[#52796F] hover:bg-[#354F52] text-white font-bold py-3 px-6 rounded-full transition duration-300"
           >
             {item.name}
@@ -150,17 +164,22 @@ export default function About() {
       {/* Modals for Education, Experience, and Recent Work */}
       {isEducationOpen && (
         <div ref={modalRef}>
-          <Education onClose={handleEducationLeave} /> 
+          <Education onClose={handleEducationLeave} />
         </div>
       )}
       {isExperienceOpen && (
         <div ref={modalRef}>
-          <Experience onClose={handleExperienceMouseLeave} /> 
+          <Experience onClose={handleExperienceMouseLeave} />
         </div>
       )}
       {isRecentWorkOpen && (
         <div ref={modalRef}>
-          <RecentWork isVisible={isRecentWorkOpen} onClose={handleRecentWorkLeave} /> 
+          <RecentWork onClose={handleRecentWorkLeave} />
+        </div>
+      )}
+      {isSkillsOpen && (
+        <div ref={modalRef}>
+          <Skills onClose={handleSkillsLeave} />
         </div>
       )}
     </section>

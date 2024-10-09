@@ -1,8 +1,7 @@
 "use client";
 
-export default function RecentWork({ isVisible, onClose }) {
-  // Only render the modal when it is visible
-  if (!isVisible) return null;
+export default function RecentWork({onClose }) {
+
 
   return (
     <div
