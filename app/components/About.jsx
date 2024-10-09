@@ -1,23 +1,24 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link"; // For linking buttons to other pages
-import { useState, useEffect, useRef } from "react"; // Import useState and useRef for modal control
-import Education from "./Education"; // Import the Education modal component
-import Experience from "./Experience"; // Import the WorkExperience modal component
+import { useState, useEffect, useRef } from "react"; 
+import Education from "./Education"; 
+import Experience from "./Experience"; 
+import RecentWork from "./RecentWork";
 
 export default function About() {
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-  const [isExperienceOpen, setIsExperienceOpen] = useState(false); // State for Work Experience modal
-  const modalRef = useRef(null); // Ref to keep track of the modal element
+  const [isRecentWorkOpen, setIsRecentWorkOpen] = useState(false);
+  const [isEducationOpen, setIsEducationOpen] = useState(false);
+  const [isExperienceOpen, setIsExperienceOpen] = useState(false);
+  const modalRef = useRef(null);
 
   // Handle mouse events to show/hide the modals
-  const handleMouseEnter = () => {
-    setIsModalOpen(true);
+  const handleEducationEnter = () => {
+    setIsEducationOpen(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsModalOpen(false);
+  const handleEducationLeave = () => {
+    setIsEducationOpen(false);
   };
 
   const handleExperienceMouseEnter = () => {
@@ -28,11 +29,20 @@ export default function About() {
     setIsExperienceOpen(false);
   };
 
+  const handleRecentWorkEnter = () => {
+    setIsRecentWorkOpen(true);
+  };
+
+  const handleRecentWorkLeave = () => {
+    setIsRecentWorkOpen(false);
+  };
+
   // Close modal on click outside
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsModalOpen(false);
-      setIsExperienceOpen(false); // Close experience modal as well
+      setIsEducationOpen(false);
+      setIsExperienceOpen(false); 
+      setIsRecentWorkOpen(false);
     }
   };
 
@@ -55,24 +65,27 @@ export default function About() {
         {[
           {
             name: "Education",
-            onMouseEnter: handleMouseEnter, // Show education modal on hover
+            onMouseEnter: handleEducationEnter,
           },
           {
             name: "Experience",
-            onMouseEnter: handleExperienceMouseEnter, // Show experience modal on hover
+            onMouseEnter: handleExperienceMouseEnter,
           },
-          { name: "Recent Work", link: "/recent-work" },
+          {
+            name: "Recent Work",
+            onMouseEnter: handleRecentWorkEnter,
+          },
           { name: "Skills", link: "/skills" },
           { name: "Achievements", link: "/achievements" },
           { name: "Hobbies", link: "/hobbies" },
         ].map((item) => (
           <button
             key={item.name}
-            onMouseEnter={item.onMouseEnter || undefined} // Add hover functionality
-            onMouseLeave={item.onMouseLeave || undefined} // Add hover out functionality
+            onMouseEnter={item.onMouseEnter || undefined}
+            onMouseLeave={item.onMouseLeave || undefined}
             onClick={
               item.link ? () => (window.location.href = item.link) : undefined
-            } // Navigate if link exists
+            } 
             className="bg-[#52796F] hover:bg-[#354F52] text-white font-bold py-3 px-6 rounded-full transition duration-300"
           >
             {item.name}
@@ -90,7 +103,7 @@ export default function About() {
         {/* Profile Picture */}
         <div className="rounded-full overflow-hidden border-4 border-white w-40 h-40 mb-6">
           <Image
-            src="/ProfilePic.jpg" // Ensure this is the correct path
+            src="/ProfilePic.jpg"
             alt="Profile Picture"
             width={160}
             height={160}
@@ -134,16 +147,20 @@ export default function About() {
         ></iframe>
       </div>
 
-      {/* Modals for Education and Work Experience */}
-      {isModalOpen && (
+      {/* Modals for Education, Experience, and Recent Work */}
+      {isEducationOpen && (
         <div ref={modalRef}>
-          <Education onClose={handleMouseLeave} /> {/* Close on modal close */}
+          <Education onClose={handleEducationLeave} /> 
         </div>
       )}
       {isExperienceOpen && (
         <div ref={modalRef}>
-          <Experience onClose={handleExperienceMouseLeave} />{" "}
-          {/* Close on modal close */}
+          <Experience onClose={handleExperienceMouseLeave} /> 
+        </div>
+      )}
+      {isRecentWorkOpen && (
+        <div ref={modalRef}>
+          <RecentWork isVisible={isRecentWorkOpen} onClose={handleRecentWorkLeave} /> 
         </div>
       )}
     </section>
