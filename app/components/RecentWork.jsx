@@ -40,21 +40,21 @@ export default function RecentWork({ isVisible, onClose }) {
         <div className="flex items-center justify-center mb-6">
           <iframe
             src="https://lottie.host/embed/ab266920-1641-4433-86f9-e38f695bcaf4/yVVvVkHnoP.json"
-            width="300"
-            height="300"
+            width="200"
+            height="200"
             frameBorder="0"
             style={{ border: "none", overflow: "hidden" }}
             allowFullScreen
           ></iframe>
         </div>
 
-        {/* Technologies Section
+        {/* Technologies Section */}
         <div>
           <b>Technologies:</b>
           <p className="mt-2 text-lg">
             Python | Scikit-learn | Folium | Geospatial Data Analysis
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );
