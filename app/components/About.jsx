@@ -6,12 +6,14 @@ import Education from "./Education";
 import Experience from "./Experience";
 import RecentWork from "./RecentWork";
 import Skills from "./Skills";
+import Achievements from "./Achievements";
 
 export default function About() {
   const [isRecentWorkOpen, setIsRecentWorkOpen] = useState(false);
   const [isEducationOpen, setIsEducationOpen] = useState(false);
   const [isExperienceOpen, setIsExperienceOpen] = useState(false);
   const [isSkillsOpen, setIsSkillsOpen] = useState(false);
+  const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
   const modalRef = useRef(null);
 
   // Handle mouse events to show/hide the modals
@@ -46,6 +48,13 @@ export default function About() {
   const handleSkillsLeave = () => {
     setIsSkillsOpen(false);
   };
+  const handelAchievementsEnter = () => {
+    setIsAchievementsOpen(true);
+  };
+
+  const handelAchievementsLeave = () => {
+    setIsAchievementsOpen(false);
+  };
 
   // Close modal on click outside
   const handleClickOutside = (event) => {
@@ -54,6 +63,7 @@ export default function About() {
       setIsExperienceOpen(false);
       setIsRecentWorkOpen(false);
       setIsSkillsOpen(false);
+      setIsAchievementsOpen(false);
     }
   };
 
@@ -90,7 +100,10 @@ export default function About() {
             name: "Skills",
             onMouseEnter: handleSkillsEnter,
           },
-          { name: "Achievements", link: "/achievements" },
+          {
+            name: "Achievements",
+            onMouseEnter: handelAchievementsEnter,
+          },
           { name: "Hobbies", link: "/hobbies" },
         ].map((item) => (
           <button
@@ -180,6 +193,11 @@ export default function About() {
       {isSkillsOpen && (
         <div ref={modalRef}>
           <Skills onClose={handleSkillsLeave} />
+        </div>
+      )}
+      {isAchievementsOpen && (
+        <div ref={modalRef}>
+          <Achievements onClose={handelAchievementsLeave} />
         </div>
       )}
     </section>
