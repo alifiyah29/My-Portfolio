@@ -188,7 +188,7 @@ export default function About() {
         ></iframe>
       </div>
 
-      {/* Modals for Education, Experience, and Recent Work */}
+      {/* Modals */}
       {isEducationOpen && (
         <div ref={modalRef}>
           <Education onClose={handleEducationLeave} />

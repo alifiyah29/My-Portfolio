@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-      scrollRestoration: true, // Enable scroll restoration
-    },
-  };
-  
-  export default nextConfig;
-  
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.pexels.com" },
+      { protocol: "https", hostname: "media.istockphoto.com" },
+    ],
+  },
+  experimental: {
+    scrollRestoration: true, // Enable scroll restoration
+  },
+};
+
+export default nextConfig;

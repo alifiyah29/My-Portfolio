@@ -1,4 +1,3 @@
-//import NavBar from "./components/NavBar";
 import "./globals.css";
 
 export default function RootLayout({ children }) {
@@ -8,14 +7,8 @@ export default function RootLayout({ children }) {
         <title>Alifiyah Shahid</title>
         <meta name="description" content="Welcome to my portfolio website" />
       </head>
-      <body className="bg-gray-50">
-        {/* Render the children, which will be the page content */}
-        <main>
-          <div>
-            {/* <NavBar /> */}
-            {children}
-          </div>
-        </main>
+      <body>
+        <main className="overflow-hidden">{children}</main>
       </body>
     </html>
   );
