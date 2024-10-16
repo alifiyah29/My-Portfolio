@@ -6,12 +6,14 @@ import Projects from "./components/Projects";
 
 export default function Page() {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <NavBar />
-      <Home />
-      <About />
-      <Projects />
-      <Contact />
+      <div className="flex-grow">
+        <Home />
+        <About />
+        <Projects />
+        <Contact />
+      </div>
     </div>
   );
 }

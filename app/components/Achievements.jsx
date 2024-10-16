@@ -42,7 +42,6 @@ export default function Achievements({ onClose }) {
             src="https://lottie.host/embed/b03db1f7-98aa-42db-8def-9802d7310bc8/B7mEXB9YdT.json"
             width="300"
             height="300"
-            frameBorder="0"
             style={{ border: "none", overflow: "hidden" }}
             allowFullScreen
           ></iframe>

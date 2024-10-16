@@ -4,6 +4,9 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.pexels.com" },
       { protocol: "https", hostname: "media.istockphoto.com" },
+      { protocol: "https", hostname: "github.com" },
+      { protocol: "https", hostname: "instagram.com" },
+      { protocol: "https", hostname: "linkedin.com/in" },
     ],
   },
   experimental: {
