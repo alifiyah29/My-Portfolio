@@ -18,7 +18,10 @@ const ContactPage = () => {
         {/* LEFT SIDE - FORM */}
         <div className="flex items-center justify-center h-full">
           <form className="bg-[#CAD2C5] rounded-xl text-xl flex flex-col mt-9 gap-6 justify-center p-8 shadow-lg mx-auto">
-            <span>Hi Alifiyah!</span>
+            <span>
+              Hi Alifiyah!
+              <span className="text-[#CAD2C5]">Hi Alifiyah qwertyuiopasdfghjklzxcvbnm!</span>
+            </span>
             <span>
               My name is{" "}
               <input
