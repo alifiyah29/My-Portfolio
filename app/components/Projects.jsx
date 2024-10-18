@@ -47,9 +47,9 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center bg-[#52796F] text-darkText px-4"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#84A98C] to-[#52796F] text-darkText px-4"
     >
-      {/* Top Section: Title and Animation */}
+      {/* Top Section: Title and Animation #52796F, #354F52, #2F3E46 */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

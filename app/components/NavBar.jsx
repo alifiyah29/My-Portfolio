@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function NavBar() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("about");
   const router = useRouter();
 
   const handleScroll = () => {
-    const sections = ["home", "about", "projects", "contact"];
-    let currentSection = "home";
+    const sections = ["about", "projects", "contact"];
+    let currentSection = "about";
 
     sections.forEach((section) => {
       const element = document.getElementById(section);
@@ -39,7 +38,7 @@ export default function NavBar() {
   return (
     <nav className="fixed left-1/2 transform -translate-x-1/2 top-4 bg-[#CAD2C5] rounded-2xl shadow-md w-80 h-12 z-50 flex items-center px-4">
       <div className="flex items-center justify-between w-full">
-        {["home", "about", "projects", "contact"].map((section) => (
+        {["about", "projects", "contact"].map((section) => (
           <button
             key={section}
             onClick={() => handleClick(section)}

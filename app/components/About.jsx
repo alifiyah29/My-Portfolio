@@ -90,7 +90,10 @@ export default function About() {
   return (
     <section
       id="about"
-      className="min-h-screen flex flex-col items-center justify-center bg-[#84A98C] text-darkText py-10 relative"
+      className="min-h-screen flex flex-col justify-center items-center text-white relative"
+      style={{
+        background: "linear-gradient(to bottom, #CAD2C5, #84A98C)",
+      }}
     >
       {/* Left Side Buttons */}
       <div className="absolute left-10 top-1/2 transform -translate-y-1/2 flex flex-col gap-4">
@@ -153,25 +156,31 @@ export default function About() {
         </div>
 
         {/* About Me Section */}
-        <h2 className="text-6xl font-bold mb-6">About Me</h2>
+        <h1 className="text-6xl font-bold mb-3">Alifiyah Shahid</h1>
+
+        {/* Tagline */}
+        <h2 className="text-2xl mt-1 font-bold">
+          {" "}
+          Software Engineer and Full-Stack Wizard!
+        </h2>
 
         {/* Bullet Points */}
-        <ul className="text-2xl space-y-4 list-disc text-left max-w-3xl mx-auto">
+        <ul className="text-2xl space-y-4 list-disc text-left max-w-3xl mx-auto mt-6">
           <p>
             Versatile Software Engineer, skilled in full-stack development,
-            cloud architecture, and database management using React, Node.js,
-            AWS, and MongoDB.
+            cloud architecture, and database management using{" "}
+            <b>React, Node.js, AWS, and MongoDB.</b>
           </p>
 
           <p>
             Passionate problem solver who enjoys building scalable,
             high-performance solutions and automating workflows, with hands-on
-            experience in CI/CD pipelines and API integrations.
+            experience in <b> CI/CD pipelines and API integrations.</b>
           </p>
           <p>
-            AWS Certified Cloud Practitioner, always excited to stay on the
-            cutting edge of technology and turn innovative ideas into real-world
-            applications.
+            <b>AWS Certified Cloud Practitioner </b>, always excited to stay on
+            the cutting edge of technology and turn innovative ideas into
+            real-world applications.
           </p>
         </ul>
       </motion.div>
